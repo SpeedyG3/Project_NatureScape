@@ -1,0 +1,14 @@
+# Node.js
+node_modules/
+
+#login creds -> testing
+users.txt
+
+#info important 
+info.txt
+
+#api keys and secure info 
+.env
+
+#local storage method to take file input from form and show on our page 
+uploads
