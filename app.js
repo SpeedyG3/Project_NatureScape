@@ -8,7 +8,10 @@ const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 const ExpressError = require('./utils/ExpressError');
+
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
+
 const flash = require('connect-flash');
 const passport = require('passport');
 const localAuth = require('passport-local');
@@ -22,11 +25,19 @@ const userRoutes = require('./routes/users');
 const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews');
 
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/camp'
 main().catch(err => console.log(err));
 async function main() {
-    await mongoose.connect('mongodb://localhost:27017/camp');
+    await mongoose.connect(dbUrl);
     console.log("Mongoose open");
 }
+
+// const dbUrl = process.env.DB_URL;
+// main().catch(err => console.log(err));
+// async function main() {
+//     await mongoose.connect(dbUrl);
+//     console.log("Mongoose open");
+// }
 
 const app = express();
 app.engine('ejs', ejsMate);
@@ -93,9 +104,24 @@ app.use(
     })
 );
 
+const secret = process.env.SECRET || 'thisshouldbeabettersecret'
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    touchAfter: 24 * 60 * 60,
+    //touchAfter - lazy update for the user so we dont update session on every refresh
+    crypto: {
+        secret: secret
+    }
+});
+
+store.on("error", function(e){
+    console.log("SESSION STORE ERROR", e);
+})
+
 const sessionConfig = {
+    store,
     name: 'UrNotGonnaReachHere',
-    secret: 'thisshouldbeabettersecret',
+    secret: secret, 
     resave: false,
     saveUninitialized: false, 
     cookie: {
