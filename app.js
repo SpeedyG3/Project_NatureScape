@@ -25,19 +25,13 @@ const userRoutes = require('./routes/users');
 const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews');
 
-const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/camp'
+const dbUrl = 'mongodb://localhost:27017/camp'
+// const dbUrl = process.env.DB_URL;
 main().catch(err => console.log(err));
 async function main() {
     await mongoose.connect(dbUrl);
     console.log("Mongoose open");
 }
-
-// const dbUrl = process.env.DB_URL;
-// main().catch(err => console.log(err));
-// async function main() {
-//     await mongoose.connect(dbUrl);
-//     console.log("Mongoose open");
-// }
 
 const app = express();
 app.engine('ejs', ejsMate);
@@ -104,7 +98,9 @@ app.use(
     })
 );
 
-const secret = process.env.SECRET || 'thisshouldbeabettersecret'
+const secret = 'thisshouldbeabettersecret'
+// const secret = process.env.SECRET
+
 const store = MongoStore.create({
     mongoUrl: dbUrl,
     touchAfter: 24 * 60 * 60,
