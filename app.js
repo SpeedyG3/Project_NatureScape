@@ -25,8 +25,8 @@ const userRoutes = require('./routes/users');
 const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews');
 
-const dbUrl = 'mongodb://localhost:27017/camp'
-// const dbUrl = process.env.DB_URL;
+// const dbUrl = 'mongodb://localhost:27017/camp'
+const dbUrl = process.env.DB_URL;
 main().catch(err => console.log(err));
 async function main() {
     await mongoose.connect(dbUrl);
@@ -98,8 +98,8 @@ app.use(
     })
 );
 
-const secret = 'thisshouldbeabettersecret'
-// const secret = process.env.SECRET
+// const secret = 'thisshouldbeabettersecret'
+const secret = process.env.SECRET
 
 const store = MongoStore.create({
     mongoUrl: dbUrl,
