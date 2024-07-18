@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Review = require('./review');
+const { coordinates } = require('@maptiler/client');
 const Schema = mongoose.Schema;
 
 
@@ -16,6 +17,17 @@ ImageSchema.virtual('thumbnail').get(function(){
 const CampgroundSchema = new Schema({
     title: String, 
     images: [ImageSchema], //moved image prop, put into schema and used schema here for using static func for thumbnail purpose
+    geometry: {
+        type: {
+            type: String, 
+            enum: ['Point'],
+            required: true, 
+        },
+        coordinates: {
+            type: [Number],
+            required: true,
+        },
+    },
     price: Number, 
     description: String, 
     location: String, 

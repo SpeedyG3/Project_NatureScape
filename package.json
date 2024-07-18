@@ -9,6 +9,8 @@
   "author": "HrishiGK",
   "license": "ISC",
   "dependencies": {
+    "@maptiler/client": "^1.8.1",
+    "@maptiler/sdk": "^2.2.1",
     "cloudinary": "^1.41.0",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^5.1.0",

@@ -1,10 +1,12 @@
 <% layout('layouts/boilerplate')%>
   <link rel="stylesheet" href="/stylesheets/stars.css">
-
+  <script>
+    const maptilerApiKey = '<%- process.env.MAPTILER_API_KEY %>';
+    const campground = <%- JSON.stringify(campground) %>
+  </script>
   <div class="row">
     <div class="col-6">
       <div class="card mb-3">
-
         <div id="campgroundCarousel" class="carousel slide">
           <div class="carousel-indicators">
             <% campground.images.forEach((img, i) => { %>
@@ -69,6 +71,7 @@
       </div>
     </div>
     <div class="col-6">
+      <div id="map" style="height: 400px"></div>
       <% if(currentUser){ %>
         <h2>Leave a Review</h2>
         <form class="mb-3 validated-form" action="/campgrounds/<%=campground.id%>/reviews" method="POST" class="mb-3"
@@ -127,3 +130,5 @@
             <%}%>
     </div>
   </div>
+
+  <script src="/public/javascript/showPageMap.js"></script>
