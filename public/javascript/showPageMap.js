@@ -1,4 +1,4 @@
-import * as maptilersdk from '@maptiler/sdk';
+// import * as maptilersdk from '@maptiler/sdk';
 
 maptilersdk.config.apiKey = maptilerApiKey;
 

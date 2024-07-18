@@ -23,6 +23,10 @@ const seedDB = async() =>{
             // image: 'https://source.unsplash.com/random/?camping',
             description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem voluptatum eos cumque architecto rem, porro dolores laboriosam delectus nihil velit perspiciatis tenetur assumenda distinctio temporibus facilis praesentium nam atque animi!', 
             price,
+            geometry: {
+              type: "Point",
+              coordinates: [80.270185880363, 13.08369403771086],
+            },
             images: [
                 {
                   url: 'https://res.cloudinary.com/dyc5oi3gi/image/upload/v1702316677/Camp/vzt6dmxcopcwokbagsth.jpg',       

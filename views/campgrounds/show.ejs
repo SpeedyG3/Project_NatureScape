@@ -1,3 +1,10 @@
+<style>
+.carousel-image{
+  height: 330px;
+  width: 400px;
+}
+
+</style>
 <% layout('layouts/boilerplate')%>
   <link rel="stylesheet" href="/stylesheets/stars.css">
   <script>
@@ -20,7 +27,7 @@
           <div class="carousel-inner">
             <% campground.images.forEach((img, i) =>{ %>
               <div class="carousel-item <%= i===0 ? 'active' : ''%>">
-                <img crossorigin="anonymous" src="<%=img.url%>" class="d-block w-100 card-img-top" alt="">
+                <img crossorigin="anonymous" src="<%=img.url%>" class="d-block w-100 card-img-top carousel-image" alt="">
               </div>
               <% }) %>
           </div>
@@ -131,4 +138,4 @@
     </div>
   </div>
 
-  <script src="/public/javascript/showPageMap.js"></script>
+  <script src="/javascript/showPageMap.js"></script>
