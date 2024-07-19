@@ -43,6 +43,13 @@ const CampgroundSchema = new Schema({
     ]
 });
 
+CampgroundSchema.virtual('properties.popUpMarkup').get(function () {
+    return `
+    <strong><a href="/campgrounds/${this._id}">${this.title}</a><strong>
+    <p>${this.description.substring(0, 20)}...</p>`
+});
+CampgroundSchema.set('toJSON', { virtuals: true });
+
 CampgroundSchema.post("findOneAndDelete", async function(doc){
     //after deletion of a campground it pass the doc so we can
     // delete the reviews
