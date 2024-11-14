@@ -26,7 +26,9 @@ const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews');
 
 // const dbUrl = 'mongodb://localhost:27017/camp'
-const dbUrl = process.env.DB_URL;
+// const dbUrl = process.env.DB_URL;
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/camp';
+
 main().catch(err => console.log(err));
 async function main() {
     await mongoose.connect(dbUrl);
@@ -103,7 +105,8 @@ app.use(
 );
 
 // const secret = 'thisshouldbeabettersecret'
-const secret = process.env.SECRET
+// const secret = process.env.SECRET
+const secret = process.env.SECRET || 'thisshouldbeabettersecret';
 
 const store = MongoStore.create({
     mongoUrl: dbUrl,
@@ -180,6 +183,8 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render('error', { err });
 });
 
-app.listen(3000, () => {
-    console.log("Serving on port 3000");
+const PORT = process.env.PORT || 3000; // Use Render's assigned port or 3000 for local dev
+
+app.listen(PORT, () => {
+    console.log(`Serving on port ${PORT}`);
 });
