@@ -102,8 +102,8 @@ app.use(
     })
 );
 
-const secret = 'thisshouldbeabettersecret'
-// const secret = process.env.SECRET
+// const secret = 'thisshouldbeabettersecret'
+const secret = process.env.SECRET
 
 const store = MongoStore.create({
     mongoUrl: dbUrl,
