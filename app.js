@@ -26,8 +26,7 @@ const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews');
 
 // const dbUrl = 'mongodb://localhost:27017/camp'
-// const dbUrl = process.env.DB_URL;
-const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/camp';
+const dbUrl = process.env.DB_URL;
 
 main().catch(err => console.log(err));
 async function main() {
@@ -54,8 +53,6 @@ app.use(mongoSanitize({
 app.use(helmet());
 const scriptSrcUrls = [
     "https://stackpath.bootstrapcdn.com/",
-    "https://api.tiles.mapbox.com/",
-    "https://api.mapbox.com/",
     "https://kit.fontawesome.com/",
     "https://cdnjs.cloudflare.com/",
     "https://cdn.jsdelivr.net",
@@ -64,7 +61,6 @@ const scriptSrcUrls = [
 const styleSrcUrls = [
     "https://kit-free.fontawesome.com/",
     "https://stackpath.bootstrapcdn.com/",
-    "https://api.mapbox.com/",
     "https://api.tiles.mapbox.com/",
     "https://fonts.googleapis.com/",
     "https://use.fontawesome.com/",
@@ -72,10 +68,6 @@ const styleSrcUrls = [
     "https://cdn.maptiler.com",
 ];
 const connectSrcUrls = [
-    "https://api.mapbox.com/",
-    "https://a.tiles.mapbox.com/",
-    "https://b.tiles.mapbox.com/",
-    "https://events.mapbox.com/",
     "https://api.maptiler.com/",
 ];
 const fontSrcUrls = [];
@@ -105,8 +97,7 @@ app.use(
 );
 
 // const secret = 'thisshouldbeabettersecret'
-// const secret = process.env.SECRET
-const secret = process.env.SECRET || 'thisshouldbeabettersecret';
+const secret = process.env.SECRET
 
 const store = MongoStore.create({
     mongoUrl: dbUrl,
@@ -183,7 +174,8 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render('error', { err });
 });
 
-const PORT = process.env.PORT || 3000; // Use Render's assigned port or 3000 for local dev
+// const PORT = 3000; 
+const PORT = process.env.PORT;
 
 app.listen(PORT, () => {
     console.log(`Serving on port ${PORT}`);
